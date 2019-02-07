@@ -1,16 +1,17 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace stock_charts
 {
-    public partial class stocksContext : DbContext
+    public partial class StocksContext : DbContext
     {
-        public stocksContext()
+        public StocksContext()
         {
         }
 
-        public stocksContext(DbContextOptions<stocksContext> options)
+        public StocksContext(DbContextOptions<StocksContext> options)
             : base(options)
         {
         }
@@ -22,7 +23,7 @@ namespace stock_charts
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                // optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Database"));
                 optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=stocks;Pooling=true;");
             }
         }
@@ -35,10 +36,10 @@ namespace stock_charts
             {
                 entity.ToTable("price");
 
-                entity.Property(e => e.PriceId).HasColumnName("price_id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.CreatedOn)
-                    .HasColumnName("created_on")
+                entity.Property(e => e.Timestamp)
+                    .HasColumnName("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.Property(e => e.Currency)
@@ -46,8 +47,8 @@ namespace stock_charts
                     .HasColumnName("currency")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Price1)
-                    .HasColumnName("price")
+                entity.Property(e => e.Value)
+                    .HasColumnName("value")
                     .HasColumnType("numeric(12,2)");
 
                 entity.Property(e => e.StockId).HasColumnName("stock_id");
