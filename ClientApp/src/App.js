@@ -1,16 +1,23 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
+import React from 'react';
+import { Router } from '@reach/router';
+import GlobalStyles from './theme/GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme/theme';
 
-export default class App extends Component {
-  static displayName = App.name;
+// Import components
+import Header from './components/Header';
+import Dashboard from './components/Dashboard';
 
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-      </Layout>
-    );
-  }
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <>
+      <GlobalStyles />
+      <Header clientName='Walmart Canada' />
+      <Router>
+        <Dashboard path='/' />
+      </Router>
+    </>
+  </ThemeProvider>
+);
+
+export default App;
