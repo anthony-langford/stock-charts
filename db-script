@@ -1,0 +1,22 @@
+install postgres
+`createdb stocks`
+
+DROP TABLE IF EXISTS stock;
+CREATE TABLE stock(
+  id serial PRIMARY KEY,
+  name VARCHAR (50) UNIQUE NOT NULL,
+  code VARCHAR (50) NOT NULL,
+  description VARCHAR (355) UNIQUE NOT NULL,
+  created_on timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+DROP TABLE IF EXISTS price;
+CREATE TABLE price(
+  price_id serial,
+  stock_id int,
+  price DECIMAL (12,2) NOT NULL,
+  currency VARCHAR (50) NOT NULL,
+  created_on timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  PRIMARY KEY (price_id),
+  FOREIGN KEY (stock_id) REFERENCES stock(id) ON DELETE CASCADE
+);
