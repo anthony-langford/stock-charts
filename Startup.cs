@@ -21,7 +21,7 @@ namespace stock_charts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<StocksContext>()
+                .AddDbContext<stocksContext>()
                 .BuildServiceProvider();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

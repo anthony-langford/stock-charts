@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS stock CASCADE;
 CREATE TABLE stock(
   id serial PRIMARY KEY,
   name VARCHAR (50) UNIQUE NOT NULL,
-  code VARCHAR (50) NOT NULL,
+  code VARCHAR (50) UNIQUE NOT NULL,
   description VARCHAR (355) NOT NULL,
   created_on timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -17,7 +17,7 @@ CREATE TABLE price(
   stock_id int,
   value DECIMAL (12,2) NOT NULL,
   currency VARCHAR (50) NOT NULL,
-  timestamp timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  timestamp timestamp UNIQUE DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (stock_id) REFERENCES stock(id) ON DELETE CASCADE
 );

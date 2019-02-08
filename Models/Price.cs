@@ -10,7 +10,5 @@ namespace stock_charts
         public decimal Value { get; set; }
         public string Currency { get; set; }
         public DateTime Timestamp { get; set; }
-
-        public virtual Stock Stock { get; set; }
     }
 }

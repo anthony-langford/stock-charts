@@ -9,8 +9,8 @@ namespace stock_charts.Controllers
     [Route("api/stocks")]
     public class StocksController : Controller
     {
-        private readonly StocksContext _context;
-        public StocksController(StocksContext context)
+        private readonly stocksContext _context;
+        public StocksController(stocksContext context)
         {
             _context = context;
         }
@@ -63,8 +63,8 @@ namespace stock_charts.Controllers
     [Route("api/prices")]
     public class PricesController : Controller
     {
-        private readonly StocksContext _context;
-        public PricesController(StocksContext context)
+        private readonly stocksContext _context;
+        public PricesController(stocksContext context)
         {
             _context = context;
         }

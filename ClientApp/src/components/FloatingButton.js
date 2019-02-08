@@ -20,7 +20,7 @@ const FloatingButtonBase = styled.button`
   width: 65px;
   height: 65px;
   text-align:center;
-  background-color: ${props => props.backgroundColor ? props.backgroundColor : props.theme.floatingButton.backgroundColor};
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : props.theme.quaternaryColor};
   border-radius: 50%;
   border: none;
   box-shadow: 2px 4px 24px #15305D;

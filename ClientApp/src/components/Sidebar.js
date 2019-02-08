@@ -3,13 +3,14 @@ import { Link, Match } from '@reach/router';
 import styled from 'styled-components';
 
 const SidebarWrapper = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   z-index: 1;
   max-width: 240px;
   min-height: calc(100vh - 70px);
-  margin-top: 70px;
-  padding-top: 16px;
+  margin: 70px 0 0;
+  padding: 32px 0 0;
   background-color: #182C4F;
   box-shadow: 3px 0 5px 0 #F1F1F3;
 `;
@@ -53,24 +54,21 @@ function Sidebar({ companyName }) {
   const icons = [
     {
       id: 0,
-      fileName: 'dashboard.png',
       path: '/',
       matchPath: '/',
       title: 'Dashboard'
     },
     {
       id: 1,
-      fileName: 'projects.png',
-      path: '/projects',
-      matchPath: '/projects/*',
-      title: 'Projects'
+      path: '/stocks',
+      matchPath: '/stocks/*',
+      title: 'Stocks'
     },
     {
       id: 2,
-      fileName: 'team.png',
-      path: '/team',
-      matchPath: '/team/*',
-      title: 'Team'
+      path: '/about',
+      matchPath: '/about/*',
+      title: 'About'
     }
   ];
 

@@ -2,12 +2,10 @@ const theme = {
   primaryColor: '#22C993',
   secondaryColor: '#4D47E8',
   tertiaryColor: '#182C4F',
+  quaternaryColor: '#3A71EF',
   button: {
-    primaryHover: '#29AF7D',
-    secondaryHover: '#3C36C7',
-  },
-  floatingButton: {
-    backgroundColor: '#3A71EF',
+    primaryHover: '#3A71EF',
+    secondaryHover: '#295ED8',
   },
   text: {
     color: 'black',

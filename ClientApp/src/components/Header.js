@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import Text from './Text';
 
 const HeaderContainer = styled.div`
@@ -25,6 +25,12 @@ const Spacer = styled.div`
   margin-right: auto;
 `;
 
+const Title = styled(Text)`
+  padding-left: 16px;
+  font-weight: 500;
+  color: #0A1F44;
+`;
+
 const AppLogo = styled.div`
   display: flex;
   align-items: center;
@@ -33,35 +39,33 @@ const AppLogo = styled.div`
   height: 38px;
   border-radius: 4px;
   color: white;
-  background-color: #9B9B9B;
+  background-color: ${props => props.theme && props.theme.quaternaryColor};
 `;
 
 const ClientLogo = styled(AppLogo)`
   border-radius: 50%;
-`;
-
-const Title = styled(Text)`
-  padding-left: 16px;
-  font-weight: 500;
-  color: #0A1F44;
+  background-color: ${props => props.theme && props.theme.tertiaryColor};
 `;
 
 const ClientLogoText = styled(Text)`
   font-weight: 500;
+  color: white;
 `;
 
-export default (props) => (
+const Header = (props) => (
   <HeaderContainer>
     <Box>
-      <AppLogo>GC</AppLogo>
-      <Title>Goods & Commerce</Title>
+      <AppLogo>SC</AppLogo>
+      <Title>Stock Charts</Title>
     </Box>
     <Spacer />
     <Box>
       <ClientLogo>
-        <ClientLogoText>W</ClientLogoText>
+        <ClientLogoText>AL</ClientLogoText>
       </ClientLogo>
       <Title>{props.clientName}</Title>
     </Box>
   </HeaderContainer>
 );
+
+export default withTheme(Header);

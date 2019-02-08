@@ -7,14 +7,16 @@ import theme from './theme/theme';
 // Import components
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
+import Stocks from './components/Stocks';
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyles />
-      <Header clientName='Client' />
+      <Header clientName='Anthony Langford' />
       <Router>
         <Dashboard path='/' />
+        <Stocks path='/stocks' />
       </Router>
     </>
   </ThemeProvider>

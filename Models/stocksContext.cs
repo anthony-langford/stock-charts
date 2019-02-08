@@ -1,17 +1,17 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace stock_charts
 {
-    public partial class StocksContext : DbContext
+    public partial class stocksContext : DbContext
     {
-        public StocksContext()
+        public stocksContext()
         {
         }
 
-        public StocksContext(DbContextOptions<StocksContext> options)
+        public stocksContext(DbContextOptions<stocksContext> options)
             : base(options)
         {
         }
@@ -23,7 +23,7 @@ namespace stock_charts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Database"));
+                // TODO: move to env
                 optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=stocks;Pooling=true;");
             }
         }
@@ -36,36 +36,34 @@ namespace stock_charts
             {
                 entity.ToTable("price");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.HasIndex(e => e.Timestamp)
+                    .HasName("price_timestamp_key")
+                    .IsUnique();
 
-                entity.Property(e => e.Timestamp)
-                    .HasColumnName("timestamp")
-                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Currency)
                     .IsRequired()
                     .HasColumnName("currency")
                     .HasMaxLength(50);
 
+                entity.Property(e => e.StockId).HasColumnName("stock_id");
+
+                entity.Property(e => e.Timestamp)
+                    .HasColumnName("timestamp")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
                 entity.Property(e => e.Value)
                     .HasColumnName("value")
                     .HasColumnType("numeric(12,2)");
-
-                entity.Property(e => e.StockId).HasColumnName("stock_id");
-
-                entity.HasOne(d => d.Stock)
-                    .WithMany(p => p.Price)
-                    .HasForeignKey(d => d.StockId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("price_stock_id_fkey");
             });
 
             modelBuilder.Entity<Stock>(entity =>
             {
                 entity.ToTable("stock");
 
-                entity.HasIndex(e => e.Description)
-                    .HasName("stock_description_key")
+                entity.HasIndex(e => e.Code)
+                    .HasName("stock_code_key")
                     .IsUnique();
 
                 entity.HasIndex(e => e.Name)

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Avatar = styled.img`
-  height: 400px;
-  width: px;
+  height: 487px;
   border-radius: 50%;
 `;
 

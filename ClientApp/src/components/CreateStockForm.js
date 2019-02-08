@@ -2,32 +2,32 @@ import React, { useState } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+
+import Button from './Button';
 import { default as TextBase } from './Text';
 
 const Wrapper = styled.div`
   display: flex;
+  flex: 1;
 `;
 
 const Form = styled.form`
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Row = styled.div`
   display: flex;
-  justify-content: space-between;
   padding: ${props => props.padded ? '0 0 24px 0' : null};
-`;
-
-const RowItem = styled.div`
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const Text = styled(TextBase)`
-  padding: 0 28px;
+  padding: 0 8px;
+  width: 80px;
 `;
 
 const Input = styled.input`
@@ -40,22 +40,21 @@ const Input = styled.input`
   background-color: #fff;
 `;
 
-const InputSmall = styled.input`
-  box-sizing: border-box;
-  width: 196px;
-  height: 40px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: ${props => props.border || '1px solid #E2E5ED'};
-  background-color: #fff;
-`;
-
 const Label = styled.label`
-  padding: 0 0 24px 0;
+  padding: 0 32px 0 0;
+  width: 150px;
 `;
 
-const SubmitButton = styled.button`
-  margin: 40px 0;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const SubmitButton = styled(Button)`
+  margin: 32px 0;
+  width: 200px;
+  height: 40px;
+  background-color: #3A71EF;
 `;
 
 const onSubmit = (values, { setSubmitting }) => {
@@ -65,54 +64,38 @@ const onSubmit = (values, { setSubmitting }) => {
   }, 500);
 };
 
-const CreateProjectForm = () => {
-  const [budgetMin, setBudgetMin] = useState(null);
-  const [budgetMax, setBudgetMax] = useState(null);
+const initialValues = {
+  name: '',
+  code: '',
+  description: '',
+  timestamp: null
+};
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .max(50, 'Too long!')
+    .required('Required'),
+  code: Yup.string()
+    .min(3, 'Too short!')
+    .max(3, 'Too long!')
+    .required('Required'),
+  description: Yup.string()
+    .max(355, 'Too long!')
+    .required('Required'),
+  timestamp: Yup.date()
+    .max(355, 'Too long!')
+});
+
+const CreateStockForm = () => {
+  // const [budgetMin, setBudgetMin] = useState(null);
+  // const [budgetMax, setBudgetMax] = useState(null);
 
   return (
     <Wrapper>
       <Formik
-        initialValues={{
-          name: '',
-          startDate: '',
-          endDate: '',
-          sector: '',
-          budgetMin: '',
-          budgetMax: ''
-        }}
+        initialValues={initialValues}
         onSubmit={onSubmit}
-        validationSchema={Yup.object().shape({
-          name: Yup.string()
-            .required('Required'),
-          startDate: Yup.string()
-            .required('Required'),
-          endDate: Yup.string()
-            .required('Required'),
-          sector: Yup.string()
-            .required('Required'),
-          budgetMin: Yup.number()
-            .required('Required')
-            .positive('Value must be positive')
-            .integer('Value must be a whole number')
-            .test({
-              name: 'budgetMin',
-              exclusive: false,
-              params: { budgetMax },
-              message: `Must be less than ${budgetMax}`,
-              test: value => value == null || value <= budgetMax,
-            }),
-          budgetMax: Yup.number()
-            .required('Required')
-            .positive('Value must be positive')
-            .integer('Value must be a whole number')
-            .test({
-              name: 'budgetMax',
-              exclusive: false,
-              params: { budgetMin },
-              message: `Must be greater than ${budgetMin}`,
-              test: value => value == null || value >= budgetMin,
-            }),
-        })}
+        validationSchema={validationSchema}
       >
         {props => {
           const {
@@ -129,28 +112,71 @@ const CreateProjectForm = () => {
           return (
             <Form onSubmit={handleSubmit}>
               <Row padded>
-                <RowItem>
-                  <Label htmlFor='name'>
-                    Project Name *
-                  </Label>
+                <Label htmlFor='name'>
+                  Company Name
+                </Label>
 
-                  <Input
-                    id='name'
-                    placeholder='Enter Project Name'
-                    type='text'
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    border={
-                      errors.name && touched.name ? '1px solid red' : null
-                    }
-                  />
+                <Input
+                  id='name'
+                  placeholder={'Enter Company\'s Name'}
+                  type='text'
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  border={
+                    errors.name && touched.name ? '1px solid red' : null
+                  }
+                />
 
-                  {/* {errors.string && touched.name && 
-                    <Text color={'red'}>{errors.string}</Text>
-                  } */}
-                </RowItem>
+                <Text color={'red'}>
+                  {errors.name && touched.name && errors.name}
+                </Text>
+              </Row>
 
+              <Row padded>
+                <Label htmlFor='code'>
+                  Company Code
+                </Label>
+
+                <Input
+                  id='code'
+                  placeholder='Enter 3-Letter Ticker Code'
+                  type='text'
+                  value={values.code}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  border={
+                    errors.code && touched.code ? '1px solid red' : null
+                  }
+                />
+
+                <Text color={'red'}>
+                  {errors.code && touched.code && errors.code}
+                </Text>
+                </Row>
+
+                <Row padded>
+                <Label htmlFor='description'>
+                  Company Description
+                </Label>
+
+                <Input
+                  id='description'
+                  placeholder='Enter Description'
+                  type='text'
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  border={
+                    errors.description && touched.description ? '1px solid red' : null
+                  }
+                />
+
+                  <Text color={'red'}>
+                    {errors.description && touched.description && errors.description}
+                  </Text>
+                </Row>
+{/*
                 <RowItem>
                   <Label htmlFor='startDate'>
                     Timeline *
@@ -167,12 +193,12 @@ const CreateProjectForm = () => {
                         border={
                           errors.startDate && touched.startDate ? '1px solid red' : null
                         }
-                      />
+                      /> */}
                       
                       {/* {errors.string && touched.name && 
                         <Text color={'red'}>{errors.string}</Text>
                       } */}
-                    </RowItem>
+                    {/* </RowItem>
 
                     <RowItem>
                       <Text>to</Text>
@@ -189,16 +215,16 @@ const CreateProjectForm = () => {
                         border={
                           errors.endDate && touched.endDate ? '1px solid red' : null
                         }
-                      />
+                      /> */}
 
                       {/* {errors.string && touched.name && 
                         <Text color={'red'}>{errors.string}</Text>
                       } */}
-                    </RowItem>
+                    {/* </RowItem>
                   </Row>
                 </RowItem>
-              </Row>
-
+              </Row> */}
+{/* 
               <Row>
                 <RowItem>
                   <Label htmlFor='sector'>
@@ -215,13 +241,13 @@ const CreateProjectForm = () => {
                     border={
                       errors.sector && touched.sector ? '1px solid red' : null
                     }
-                  />
+                  /> */}
 
                   {/* {errors.string && touched.name && 
                     <Text color={'red'}>{errors.string}</Text>
                   } */}
-                </RowItem>
-
+                {/* </RowItem> */}
+{/* 
                 <RowItem>
                   <Label htmlFor='budgetMin'>
                     Budget Range *
@@ -250,8 +276,8 @@ const CreateProjectForm = () => {
 
                     <RowItem>
                       <Text>to</Text>
-                    </RowItem>
-
+                    </RowItem> */}
+{/* 
                     <RowItem>
                       <InputSmall
                         id='budgetMax'
@@ -274,11 +300,16 @@ const CreateProjectForm = () => {
                     </RowItem>
                   </Row>
                 </RowItem>
-              </Row>
+              </Row> */}
 
-              <SubmitButton type='submit' disabled={isSubmitting}>
-                Save and Continue
-              </SubmitButton>
+              <ButtonWrapper>
+                <SubmitButton
+                  type='submit'
+                  disabled={isSubmitting}
+                >
+                  Save and Continue
+                </SubmitButton>
+              </ButtonWrapper>
             </Form>
           );
         }}
@@ -287,4 +318,4 @@ const CreateProjectForm = () => {
   );
 };
 
-export default withTheme(CreateProjectForm);
+export default withTheme(CreateStockForm);

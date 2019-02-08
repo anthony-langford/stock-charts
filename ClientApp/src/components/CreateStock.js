@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import styled, { withTheme } from 'styled-components';
 import Modal from './Modal';
 import FloatingButton from './FloatingButton';
-import CreateProjectForm from './CreateProjectForm';
+import CreateStockForm from './CreateStockForm';
 
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  padding: 24px 32px;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   padding: 0 0 40px;
+  align-items: center;
 `;
 
 const Title = styled.h1`
@@ -23,6 +25,9 @@ const Title = styled.h1`
 `;
 
 const CloseButton = styled.button`
+  padding: 0;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
   outline: none;
@@ -32,11 +37,10 @@ const Spacer = styled.div`
   margin: 0 auto;
 `;
 
-const CreateProject = () => {
+const CreateStock = () => {
   const [modalState, setModalState] = useState(false);
 
   const handleClick = () => {
-    console.log('click');
     setModalState(true);
   };
 
@@ -48,8 +52,8 @@ const CreateProject = () => {
     <>
       <FloatingButton onClick={handleClick} />
 
-      <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
-      {/* <Modal isOpen={true} handleCloseModal={handleCloseModal}> */}
+      {/* <Modal isOpen={modalState} handleCloseModal={handleCloseModal}> */}
+      <Modal isOpen={true} handleCloseModal={handleCloseModal}>
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>New Project</Title>
@@ -59,7 +63,7 @@ const CreateProject = () => {
             <CloseButton onClick={handleCloseModal} tabIndex='0'>X</CloseButton>
           </TitleWrapper>
           
-          <CreateProjectForm />
+          <CreateStockForm />
           {/* <button onClick={handleCloseModal}>Close Modal</button> */}
         </Wrapper>
       </Modal>
@@ -67,4 +71,4 @@ const CreateProject = () => {
   );
 };
 
-export default withTheme(CreateProject);
+export default withTheme(CreateStock);
