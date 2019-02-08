@@ -36,7 +36,7 @@ const media = Object.keys(sizes).reduce((acc, label) => {
   return acc
 }, {});
 
-console.log(media.desktop('width: 40%'))
+// console.log(media.desktop('width: 40%'))
 
 const StyledModal = styled(ReactModalAdapter)`
   &__overlay {

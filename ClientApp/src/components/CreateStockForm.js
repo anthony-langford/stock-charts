@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { withTheme } from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -87,9 +87,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const CreateStockForm = () => {
-  // const [budgetMin, setBudgetMin] = useState(null);
-  // const [budgetMax, setBudgetMax] = useState(null);
-
   return (
     <Wrapper>
       <Formik

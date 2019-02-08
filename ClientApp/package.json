@@ -6,8 +6,11 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
+    "chart.js": "^2.7.3",
+    "easy-peasy": "^1.12.1",
     "formik": "^1.4.3",
     "react": "^16.8.1",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.1",
     "react-modal": "^3.8.1",
     "react-scripts": "2.1.3",
