@@ -15,15 +15,15 @@ namespace stock_charts.Controllers
             _context = context;
         }
 
-        // GET: api/prices
-        [HttpGet()]
+        // GET: api/stocks
+        [HttpGet]
         public IActionResult GetStocks()
         {
             var stocks = _context.Stock.ToList();
             return StatusCode(200, stocks);
         }
 
-        // GET api/prices/5
+        // GET api/stocks/5
         [HttpGet("{id}")]
         public IActionResult GetStock(int id)
         {
@@ -31,7 +31,7 @@ namespace stock_charts.Controllers
             return StatusCode(200, stock);
         }
 
-        // POST api/prices
+        // POST api/stocks
         [HttpPost]
         public IActionResult Post([FromBody]Stock stock)
         {
@@ -40,7 +40,7 @@ namespace stock_charts.Controllers
             return StatusCode(201, stock);
         }
 
-        // PUT api/prices/
+        // PUT api/stocks/
         [HttpPut]
         public IActionResult UpdateStock([FromBody]Stock stock)
         {
@@ -49,7 +49,7 @@ namespace stock_charts.Controllers
             return StatusCode(200, stock);
         }
 
-        // DELETE api/prices/5
+        // DELETE api/stocks/5
         [HttpDelete("{id}")]
         public IActionResult DeleteStock(int id)
         {
@@ -70,11 +70,11 @@ namespace stock_charts.Controllers
         }
 
         // GET: api/prices
-        [HttpGet()]
+        [HttpGet]
         public IActionResult GetPrices()
         {
-            var Prices = _context.Price.ToList();
-            return StatusCode(200, Prices);
+            var prices = _context.Price.ToList();
+            return StatusCode(200, prices);
         }
 
         // GET api/prices/5

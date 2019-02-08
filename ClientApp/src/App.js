@@ -12,7 +12,7 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyles />
-      <Header clientName='Walmart Canada' />
+      <Header clientName='Client' />
       <Router>
         <Dashboard path='/' />
       </Router>

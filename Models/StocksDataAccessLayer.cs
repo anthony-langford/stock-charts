@@ -9,6 +9,7 @@ namespace stock_charts.Models
     public class StocksDataAccessLayer  
     {  
         StocksContext db = new StocksContext();
+        
         // Get all stocks
         public IEnumerable<Stock> GetAllStocks()
         {
@@ -81,6 +82,7 @@ namespace stock_charts.Models
                 throw;
             }
         }
+        
         // Get all prices
 
         public IEnumerable<Price> GetAllPrices()
