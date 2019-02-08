@@ -15,6 +15,9 @@ const FloatingButtonBase = styled.button`
   align-items: center;
   position: fixed;
   z-index: 1000;
+  @media (max-width: 600px) {
+    right: 30px;
+  }
   right: 60px;
   bottom: 30px;
   width: 65px;

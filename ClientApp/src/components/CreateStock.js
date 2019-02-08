@@ -52,8 +52,8 @@ const CreateStock = () => {
     <>
       <FloatingButton onClick={handleClick} />
 
-      {/* <Modal isOpen={modalState} handleCloseModal={handleCloseModal}> */}
-      <Modal isOpen={true} handleCloseModal={handleCloseModal}>
+      <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
+      {/* <Modal isOpen={true} handleCloseModal={handleCloseModal}> */}
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>New Project</Title>

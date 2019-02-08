@@ -12,12 +12,14 @@ const HeaderContainer = styled.div`
   box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.15);
 `;
 
-const Box = styled.div`
+const TitleWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 16px 36px;
-  height: 100%;
+  @media (max-width: 375px) {
+    margin: 16px 16px;
+  }
+  margin: 16px 36px;
 `;
 
 const Spacer = styled.div`
@@ -29,13 +31,20 @@ const Title = styled(Text)`
   padding-left: 16px;
   font-weight: 500;
   color: #0A1F44;
+  @media (max-width: 425px) {
+    width: min-content;
+  }
+`;
+
+const LogoWrapper = styled(TitleWrapper)`
+  align-items: right;
 `;
 
 const AppLogo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
+  min-width: 38px;
   height: 38px;
   border-radius: 4px;
   color: white;
@@ -54,17 +63,17 @@ const ClientLogoText = styled(Text)`
 
 const Header = (props) => (
   <HeaderContainer>
-    <Box>
+    <TitleWrapper>
       <AppLogo>SC</AppLogo>
       <Title>Stock Charts</Title>
-    </Box>
+    </TitleWrapper>
     <Spacer />
-    <Box>
+    <LogoWrapper>
       <ClientLogo>
         <ClientLogoText>AL</ClientLogoText>
       </ClientLogo>
       <Title>{props.clientName}</Title>
-    </Box>
+    </LogoWrapper>
   </HeaderContainer>
 );
 
