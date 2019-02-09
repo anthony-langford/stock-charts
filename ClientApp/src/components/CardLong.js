@@ -25,8 +25,8 @@ const Wrapper = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
 
-  @media (min-width: 640px) {
-    min-width: 200px;
+  @media (min-width: 600px) {
+    min-width: 160px;
   }
 `;
 
@@ -41,25 +41,22 @@ const Title = styled(Text)`
   text-overflow: ellipsis;
 `;
 
-const DeleteButton = styled(Button)`
-  @media (max-width: 700px) {
-    margin: 0 2px;
-  }
-  margin: 0 16px;
-  background-color: ${props => props.theme.tertiaryColor};
-  &:hover {
-    background-color: ${props => props.theme.button.tertiaryHover};
-  }
-`;
-
 const EditButton = styled(Button)`
-  @media (max-width: 700px) {
-    margin: 0 2px;
+  @media (max-width: 1000px) {
+    margin: 0 4px;
   }
   margin: 0 16px;
   background-color: ${props => props.theme.primaryColor};
+  outline: none;
   &:hover {
     background-color: ${props => props.theme.button.primaryHover};
+  }
+`;
+
+const DeleteButton = styled(EditButton)`
+  background-color: ${props => props.theme.tertiaryColor};
+  &:hover {
+    background-color: ${props => props.theme.button.tertiaryHover};
   }
 `;
 
@@ -68,18 +65,20 @@ const CardLong = ({
   name,
   code,
   description,
+  handleClickEdit,
+  handleClickDelete
 }) => (
   <CardItem>
     <TitleWrapper>
-      {window.innerWidth < 630 ?
+      {window.innerWidth < 400 ?
         <Title>{code}</Title> :
         <Title>{name} ({code})</Title>
       }
     </TitleWrapper>
 
     <Wrapper>
-       <EditButton>Edit</EditButton>
-       <DeleteButton>Delete</DeleteButton>
+       <EditButton onClick={handleClickEdit} value={id}>Edit</EditButton>
+       <DeleteButton onClick={handleClickDelete}>Delete</DeleteButton>
     </Wrapper>
   </CardItem>
 );

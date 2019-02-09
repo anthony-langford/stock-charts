@@ -8,7 +8,7 @@ import FloatingButton from './FloatingButton';
 import CreatePriceForm from './CreatePriceForm';
 
 // Import helper functions
-import postAndSet from '../helpers/postAndSet';
+import fetchAndSet from '../helpers/fetchAndSet';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -61,7 +61,7 @@ const CreatePrice = ({
   const onSubmit = (values, { setSubmitting }) => {
     values['stockId'] = stockId;
     console.log(values);
-    postAndSet('prices', values)
+    fetchAndSet('POST', 'prices', values)
     .then(result => {
       console.log(result);
       addPrice(result);

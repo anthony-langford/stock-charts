@@ -23,7 +23,9 @@ const Divider = styled.hr`
 `;
 
 const StocksList = ({
-  stocks
+  stocks,
+  handleClickEdit,
+  handleClickDelete
 }) => (
   <CardWrapper>
     {stocks.map((stock, i) => (
@@ -34,6 +36,8 @@ const StocksList = ({
             name={stock.name}
             code={stock.code}
             description={stock.description}
+            handleClickEdit={handleClickEdit}
+            handleClickDelete={handleClickDelete}
           />
         </Link>
 

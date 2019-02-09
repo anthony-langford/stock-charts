@@ -9,11 +9,10 @@ import CreatePrice from './CreatePrice';
 import Chart from './Chart';
 
 // Import helpers
-import fetchAndSet from '../helpers/fetchAndSet';
+import getAndSet from '../helpers/getAndSet';
+import getStockById from '../helpers/getStockById';
 
 const filterPricesByStockId = (id, prices) => prices.filter(price => price.stockId === id);
-
-const getStockById = (id, stocks) => stocks.find(stock => stock.id === id);
 
 const StockDetails = ({ stockId }) => {
   const stocks = useStore(state => state.stocks.items);
@@ -27,8 +26,8 @@ const StockDetails = ({ stockId }) => {
   // This is equivalent to the componentDidMount lifecycle hook
   useEffect(() => {
     Promise.all([
-      fetchAndSet('stocks', setStocks),
-      fetchAndSet('prices', setPrices)
+      getAndSet('stocks', setStocks),
+      getAndSet('prices', setPrices)
     ])
   }, []);
 

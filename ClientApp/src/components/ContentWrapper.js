@@ -13,11 +13,11 @@ const ContentWrapper = styled.div`
     margin: 70px 0 0;
   }
   margin: 70px 0 0 170px;
-  @media (max-width: 600px) {
+  @media (max-width: 738px) {
     padding: 8px 16px 120px;
   }
-  @media (min-width: 700px) {
-    padding: 32px 140px 120px 40px; 
+  @media (min-width: 738px) {
+    padding: 32px 180px 120px 40px; 
   }
   align-items: center;
   background-color: #F7F8FA;

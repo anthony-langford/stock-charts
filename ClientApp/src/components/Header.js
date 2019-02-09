@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { withTheme } from 'styled-components';
+import { Link } from '@reach/router';
 import Text from './Text';
 
 const HeaderContainer = styled.div`
@@ -40,15 +41,17 @@ const LogoWrapper = styled(TitleWrapper)`
   align-items: right;
 `;
 
-const AppLogo = styled.div`
+const AppLogo = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 38px;
   height: 38px;
+  border: none;
   border-radius: 4px;
   color: white;
   background-color: ${props => props.theme && props.theme.secondaryColor};
+  outline: none;
 `;
 
 const ClientLogo = styled(AppLogo)`
@@ -61,10 +64,14 @@ const ClientLogoText = styled(Text)`
   color: white;
 `;
 
-const Header = (props) => (
+const Header = ({
+  clientName
+}) => (
   <HeaderContainer>
     <TitleWrapper>
-      <AppLogo>SC</AppLogo>
+      <Link to='/'>
+        <AppLogo>SC</AppLogo>
+      </Link>
       <Title>Stock Charts</Title>
     </TitleWrapper>
     <Spacer />
@@ -72,7 +79,7 @@ const Header = (props) => (
       <ClientLogo>
         <ClientLogoText>AL</ClientLogoText>
       </ClientLogo>
-      <Title>{props.clientName}</Title>
+      <Title>{clientName}</Title>
     </LogoWrapper>
   </HeaderContainer>
 );

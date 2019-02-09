@@ -8,15 +8,15 @@ import ContentWrapper from './ContentWrapper';
 import CreateStock from './CreateStock';
 
 // Import helpers
-import fetchAndSet from '../helpers/fetchAndSet';
+import getAndSet from '../helpers/getAndSet';
 
 const Dashboard = () => {
   const addStocks = useActions(actions => actions.stocks.set);
   const addPrices = useActions(actions => actions.prices.set);
 
   useEffect(() => {
-    fetchAndSet('stocks', addStocks);
-    fetchAndSet('prices', addPrices);
+    getAndSet('stocks', addStocks);
+    getAndSet('prices', addPrices);
   }, []);
 
   return (

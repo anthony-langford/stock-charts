@@ -27,7 +27,6 @@ const SubmitButton = styled(Button)`
   width: 200px;
   height: 40px;
   background-color: ${props => props.theme.secondaryColor};
-  outline: none;
 
   &:hover {
     background-color: ${props => props.theme.button.secondaryHover};
@@ -55,11 +54,11 @@ const inputFields = [
   }
 ];
 
-const initialValues = {
-  name: '',
-  code: '',
-  description: ''
-};
+const initialValues = stock => ({
+  name: stock.name,
+  code: stock.code,
+  description: stock.description
+});
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -74,13 +73,14 @@ const validationSchema = Yup.object().shape({
     .required('Required')
 });
 
-const CreateStockForm = ({
-  onSubmit
+const EditStockForm = ({
+  onSubmit,
+  stock
 }) => {
   return (
     <Wrapper>
       <Formik
-        initialValues={initialValues}
+        initialValues={initialValues(stock)}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
@@ -123,4 +123,4 @@ const CreateStockForm = ({
   );
 };
 
-export default withTheme(CreateStockForm);
+export default withTheme(EditStockForm);

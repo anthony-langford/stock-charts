@@ -9,7 +9,7 @@ import FloatingButton from './FloatingButton';
 import CreateStockForm from './CreateStockForm';
 
 // Import helper functions
-import postAndSet from '../helpers/postAndSet';
+import fetchAndSet from '../helpers/fetchAndSet';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -58,7 +58,7 @@ const CreateStock = () => {
   }
 
   const onSubmit = (values, { setSubmitting }) => {
-    postAndSet('stocks', values)
+    fetchAndSet('POST', 'stocks', values)
     .then(result => {
       addStock(result);
       setModalState(false);

@@ -5,22 +5,24 @@ const reducer = {
   stocks: {
     items: [],
     // 👇 define actions directly on your model
-    set: (state, payload) => {
-      // do simple mutation to update state, and we make it an immutable update
-      state.items = (payload);
-      // (you can also return a new immutable instance if you prefer)
-    },
+    set: (state, payload) => ({ ...state, items: payload }),
     add: (state, payload) => {
-      state.items.push(payload);
-    }
+      const newState = state;
+      newState.items.push(payload);
+      return newState;
+    },
+    edit: (state, payload) => {
+      const newState = state.items.map(obj => obj.id === payload.id ? payload : obj);
+      return { ...state, items: newState };
+    },
   },
   prices: {
     items: [],
-    set: (state, payload) => {
-      state.items = (payload);
-    },
+    set: (state, payload) => ({ ...state, items: payload }),
     add: (state, payload) => {
-      state.items.push(payload);
+      const newState = state;
+      newState.items.push(payload);
+      return newState;
     }
   }
 };
