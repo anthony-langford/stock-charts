@@ -63,7 +63,10 @@ namespace stock_charts
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    // This is for quicker front-end development
+                    // so webpack can handle hot-reloading rather than the backend
+                    // spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });
         }
