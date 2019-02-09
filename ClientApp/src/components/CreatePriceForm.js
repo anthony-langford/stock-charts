@@ -46,7 +46,7 @@ const inputFields = [
 
 const initialValues = {
   value: '',
-  currency: 'CAD'
+  currency: 'EUR'
 };
 
 const validationSchema = Yup.object().shape({

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // Hide sidebar for mobile
 const SidebarWrapper = styled.div`
   box-sizing: border-box;
+  position: fixed;
   @media (max-width: 600px) {
     display: none;
   }

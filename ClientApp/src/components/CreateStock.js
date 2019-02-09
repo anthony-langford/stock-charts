@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useActions } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
+import { navigate } from '@reach/router';
 
 // Import components
 import Modal from './Modal';
@@ -61,8 +62,9 @@ const CreateStock = () => {
     .then(result => {
       addStock(result);
       setModalState(false);
+      navigate('/stocks');
+      setSubmitting(false);
     });
-    setSubmitting(false);
   };
 
   return (
@@ -70,7 +72,6 @@ const CreateStock = () => {
       <FloatingButton onClick={handleClick} />
 
       <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
-      {/* <Modal isOpen={true} handleCloseModal={handleCloseModal}> */}
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>New Stock</Title>
@@ -81,7 +82,6 @@ const CreateStock = () => {
           </TitleWrapper>
           
           <CreateStockForm onSubmit={onSubmit} />
-          {/* <button onClick={handleCloseModal}>Close Modal</button> */}
         </Wrapper>
       </Modal>
     </>

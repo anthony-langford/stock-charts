@@ -48,12 +48,12 @@ const AppLogo = styled.div`
   height: 38px;
   border-radius: 4px;
   color: white;
-  background-color: ${props => props.theme && props.theme.quaternaryColor};
+  background-color: ${props => props.theme && props.theme.secondaryColor};
 `;
 
 const ClientLogo = styled(AppLogo)`
   border-radius: 50%;
-  background-color: ${props => props.theme && props.theme.tertiaryColor};
+  background-color: ${props => props.theme && props.theme.primaryColor};
 `;
 
 const ClientLogoText = styled(Text)`

@@ -24,7 +24,7 @@ const Dashboard = () => {
       <Sidebar />
 
       <ContentWrapper>
-        hello
+        <h1>hello</h1>
       </ContentWrapper>
 
       <CreateStock />

@@ -26,7 +26,11 @@ const SubmitButton = styled(Button)`
   margin: 32px 0;
   width: 200px;
   height: 40px;
-  background-color: #3A71EF;
+  background-color: ${props => props.theme.secondaryColor};
+
+  &:hover {
+    background-color: ${props => props.theme.button.secondaryHover};
+  }
 `;
 
 const inputFields = [

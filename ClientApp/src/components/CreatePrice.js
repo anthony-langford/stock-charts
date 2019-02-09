@@ -66,8 +66,8 @@ const CreatePrice = ({
       console.log(result);
       addPrice(result);
       setModalState(false);
+      setSubmitting(false);
     });
-    setSubmitting(false);
   };
 
   return (

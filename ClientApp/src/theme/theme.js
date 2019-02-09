@@ -1,11 +1,11 @@
 const theme = {
   primaryColor: '#22C993',
-  secondaryColor: '#4D47E8',
-  tertiaryColor: '#182C4F',
-  quaternaryColor: '#3A71EF',
+  secondaryColor: '#3A71EF',
+  tertiaryColor: '#ff0000',
   button: {
-    primaryHover: '#3A71EF',
+    primaryHover: '#13AF7D',
     secondaryHover: '#295ED8',
+    tertiaryHover: '#CC0000',
   },
   text: {
     color: 'black',
