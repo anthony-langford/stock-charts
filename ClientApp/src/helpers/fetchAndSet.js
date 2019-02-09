@@ -1,8 +1,6 @@
 const fetchAndSet = async (endpoint = '', setter = () => {}) => {
   try {
-    const response = await fetch(`https://localhost:5001/api/${endpoint}/`, {
-      mode: 'cors'
-    });
+    const response = await fetch(`https://localhost:5001/api/${endpoint}/`);
     const data = await response.json();
     await setter(data);
     return data;

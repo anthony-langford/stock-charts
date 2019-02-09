@@ -1,14 +1,16 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const useCurrencyLocale = (value, prices) => value.toLocaleString('en-CA',
-  { style: 'currency', currency: prices[0].currency }
-);
-
 const Chart = ({
   stock,
-  prices
+  prices = []
 }) => {
+  // Used to add locale currency sign to y axis tick labels
+  const useCurrencyLocale = prices.length ? (value, prices) => value.toLocaleString('en-CA',
+  { style: 'currency', currency: prices[0].currency }
+  ) : null;
+
+  // Set x axis options
   const xAxesOptions = [{
     scaleLabel: {
       display: true,
@@ -16,8 +18,9 @@ const Chart = ({
       fontSize: 16,
     },
     type: 'time',
-  }]
+  }];
 
+  // Set y axis options 
   const yAxesOptions = [{
     scaleLabel: {
       display: true,
@@ -32,19 +35,27 @@ const Chart = ({
     }
   }];
 
+  // Chart options
   const options = {
     scales: {
       xAxes: xAxesOptions,
       yAxes: yAxesOptions
-    }
+    },
   };
 
-  const priceList = prices.length ? (
+  // Fix chart in mobile display
+  if (window.innerWidth < 400) {
+    options.maintainAspectRatio = false;
+  }
+
+  // Map price list 
+  const priceList = prices ? (
     prices.map(price => (
       { x: price.timestamp, y: price.value }
     ))
   ) : null;
 
+  // Chart data
   const data = {
     datasets: [
       {

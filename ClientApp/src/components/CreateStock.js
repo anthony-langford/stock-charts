@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { useActions } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
+
+// Import components
 import Modal from './Modal';
 import FloatingButton from './FloatingButton';
 import CreateStockForm from './CreateStockForm';
 
+// Import helper functions
+import postAndSet from '../helpers/postAndSet';
+
 const Wrapper = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -39,6 +46,7 @@ const Spacer = styled.div`
 
 const CreateStock = () => {
   const [modalState, setModalState] = useState(false);
+  const addStock = useActions(actions => actions.stocks.add);
 
   const handleClick = () => {
     setModalState(true);
@@ -48,6 +56,16 @@ const CreateStock = () => {
     setModalState(false);
   }
 
+  const onSubmit = (values, { setSubmitting }) => {
+    postAndSet('stocks', values)
+    .then(result => {
+      console.log(result);
+      addStock(result);
+      setModalState(false);
+    });
+    setSubmitting(false);
+  };
+
   return (
     <>
       <FloatingButton onClick={handleClick} />
@@ -56,14 +74,14 @@ const CreateStock = () => {
       {/* <Modal isOpen={true} handleCloseModal={handleCloseModal}> */}
         <Wrapper>
           <TitleWrapper>
-            <Title fontSize={18} fontWeight={500}>New Project</Title>
+            <Title fontSize={18} fontWeight={500}>New Stock</Title>
 
             <Spacer />
 
             <CloseButton onClick={handleCloseModal} tabIndex='0'>X</CloseButton>
           </TitleWrapper>
           
-          <CreateStockForm />
+          <CreateStockForm onSubmit={onSubmit} />
           {/* <button onClick={handleCloseModal}>Close Modal</button> */}
         </Wrapper>
       </Modal>

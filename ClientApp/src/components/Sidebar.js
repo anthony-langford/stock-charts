@@ -2,8 +2,12 @@ import React from 'react';
 import { Link, Match } from '@reach/router';
 import styled from 'styled-components';
 
+// Hide sidebar for mobile
 const SidebarWrapper = styled.div`
   box-sizing: border-box;
+  @media (max-width: 600px) {
+    display: none;
+  }
   display: flex;
   flex-direction: column;
   z-index: 1;

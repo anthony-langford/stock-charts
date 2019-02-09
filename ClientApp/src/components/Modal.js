@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css, withTheme } from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#root');
@@ -19,25 +19,6 @@ const ReactModalAdapter = ({ className, ...props }) => {
   );
 }
 
-const sizes = {
-  desktop: 992,
-  tablet: 768,
-  phone: 576,
-}
-
-// Iterate through the sizes and create a media template
-const media = Object.keys(sizes).reduce((acc, label) => {
-  acc[label] = (...args) => css`
-    @media (max-width: ${sizes[label] / 16}em) {
-      ${css(...args)}
-    }
-  `
-
-  return acc
-}, {});
-
-// console.log(media.desktop('width: 40%'))
-
 const StyledModal = styled(ReactModalAdapter)`
   &__overlay {
     position: fixed;
@@ -53,10 +34,13 @@ const StyledModal = styled(ReactModalAdapter)`
   &__content {
     position: absolute;
     display: flex;
+    flex: 1;
     z-index: 1001;
     top: 50%;
     left: 50%;
-    ${media.phone('width: 50px;')}
+    // @media (max-width: 700px) {
+    //   width: 90%;
+    // }
     transform: translate(-50%, -50%);
     border: 1px solid #EAEDF3;
     background-color: #FFFFFF;
