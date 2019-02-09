@@ -1,7 +1,3 @@
-install postgres
-`brew services start postgres` (windows?)
-`createdb stocks`
-
 DROP TABLE IF EXISTS stock CASCADE;
 CREATE TABLE stock(
   id serial PRIMARY KEY,

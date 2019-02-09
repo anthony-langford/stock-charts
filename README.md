@@ -3,11 +3,25 @@
 ### Quickstart
 
 ```
-# install
+# install Postgresql
+# Create db
+createdb stocks
+
+# Run db script (See db-script file for [script])
+psql stocks
+[script]
+
+# install back-end
+cd stock-charts
+dotnet restore
+
+# install front-end
+cd ClientApp
 yarn
 
 # start
-yarn start
+cd ..
+dotnet run
 ```
 
 #### UI Tech
