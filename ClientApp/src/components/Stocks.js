@@ -49,6 +49,7 @@ const Stocks = () => {
     setDeleteStockModalState(false);
   }
 
+  // TODO: skip request if nothing changed
   const onSubmitEdit = (values, { setSubmitting }) => {
     values.id = stock.id;
     values.createdOn = stock.createdOn;

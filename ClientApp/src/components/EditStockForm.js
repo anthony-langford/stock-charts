@@ -76,51 +76,49 @@ const validationSchema = Yup.object().shape({
 const EditStockForm = ({
   onSubmit,
   stock
-}) => {
-  return (
-    <Wrapper>
-      <Formik
-        initialValues={initialValues(stock)}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {props => {
-          const {
-            values,
-            touched,
-            errors,
-            // dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            // handleReset,
-          } = props;
-          return (
-            <Form onSubmit={handleSubmit}>
-              <FormInputs
-                inputFields={inputFields}
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                errors={errors}
-                touched={touched}
-              />
+}) => (
+  <Wrapper>
+    <Formik
+      initialValues={initialValues(stock)}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {props => {
+        const {
+          values,
+          touched,
+          errors,
+          // dirty,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          // handleReset,
+        } = props;
+        return (
+          <Form onSubmit={handleSubmit}>
+            <FormInputs
+              inputFields={inputFields}
+              values={values}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={errors}
+              touched={touched}
+            />
 
-              <ButtonWrapper>
-                <SubmitButton
-                  type='submit'
-                  disabled={isSubmitting}
-                >
-                  Save and Continue
-                </SubmitButton>
-              </ButtonWrapper>
-            </Form>
-          );
-        }}
-      </Formik>
-    </Wrapper>
-  );
-};
+            <ButtonWrapper>
+              <SubmitButton
+                type='submit'
+                disabled={isSubmitting}
+              >
+                Save and Continue
+              </SubmitButton>
+            </ButtonWrapper>
+          </Form>
+        );
+      }}
+    </Formik>
+  </Wrapper>
+);
 
 export default withTheme(EditStockForm);

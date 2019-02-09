@@ -1,5 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Line } from 'react-chartjs-2';
+
+const Wrapper = styled.div`
+  padding: 0 0 32px 0;
+`;
 
 const Chart = ({
   stock,
@@ -83,12 +88,14 @@ const Chart = ({
   };
 
   return (
-    <div>
-      <h2>Price Chart</h2>
-      <h3>Company: {stock ? (`${stock.name} (${stock.code.toUpperCase()})`) : 'Loading...'}</h3>
-      <span>Description: {stock ? stock.description : 'Loading...'}</span>
+    <>
+      <Wrapper>
+        <h2>Price Chart</h2>
+        <h3>Company: {stock ? (`${stock.name} (${stock.code.toUpperCase()})`) : 'Loading...'}</h3>
+        <span>Description: {stock ? stock.description : 'Loading...'}</span>
+      </Wrapper>
       <Line data={data} options={options} />
-    </div>
+    </>
   );
 };
 

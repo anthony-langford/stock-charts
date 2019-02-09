@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useActions } from 'easy-peasy';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import { navigate } from '@reach/router';
 
 // Import components
@@ -88,4 +88,4 @@ const CreateStock = () => {
   );
 };
 
-export default withTheme(CreateStock);
+export default CreateStock;

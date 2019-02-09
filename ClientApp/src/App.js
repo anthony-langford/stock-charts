@@ -11,6 +11,7 @@ import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import Stocks from './components/Stocks';
 import StockDetails from './components/StockDetails';
+import About from './components/About';
 
 const App = () => (
   <StoreProvider store={store}>
@@ -22,6 +23,7 @@ const App = () => (
             <Dashboard path='/' />
             <Stocks path='/stocks' />
             <StockDetails path='/stocks/:stockId' />
+            <About path='/about' />
           </Router>
         </>
     </ThemeProvider>

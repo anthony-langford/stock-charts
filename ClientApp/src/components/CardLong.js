@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { withTheme } from 'styled-components';
 import Text from './Text';
-import Button from './Button';
+import {default as ButtonBase } from './Button';
 
 const CardItem = styled.div`
   box-sizing: border-box;
@@ -41,32 +41,20 @@ const Title = styled(Text)`
   text-overflow: ellipsis;
 `;
 
-const EditButton = styled(Button)`
+const Button = styled(ButtonBase)`
   @media (max-width: 1000px) {
     margin: 0 4px;
   }
   margin: 0 16px;
-  background-color: ${props => props.theme.primaryColor};
-  outline: none;
-  &:hover {
-    background-color: ${props => props.theme.button.primaryHover};
-  }
-`;
-
-const DeleteButton = styled(EditButton)`
-  background-color: ${props => props.theme.tertiaryColor};
-  &:hover {
-    background-color: ${props => props.theme.button.tertiaryHover};
-  }
 `;
 
 const CardLong = ({
   id,
   name,
   code,
-  description,
   handleClickEdit,
-  handleClickDelete
+  handleClickDelete,
+  theme
 }) => (
   <CardItem>
     <TitleWrapper>
@@ -77,8 +65,22 @@ const CardLong = ({
     </TitleWrapper>
 
     <Wrapper>
-       <EditButton onClick={handleClickEdit} value={id}>Edit</EditButton>
-       <DeleteButton onClick={handleClickDelete} value={id}>Delete</DeleteButton>
+       <Button
+        onClick={handleClickEdit}
+        value={id}
+        backgroundColor={theme.primaryColor}
+        hoverBackgroundColor={theme.button.primaryHover}
+      >
+        Edit
+      </Button>
+      <Button
+        onClick={handleClickDelete}
+        value={id}
+        backgroundColor={theme.tertiaryColor}
+        hoverBackgroundColor={theme.button.tertiaryHover}
+      >
+        Delete
+      </Button>
     </Wrapper>
   </CardItem>
 );

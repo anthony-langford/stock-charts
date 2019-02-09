@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -53,6 +53,7 @@ const validationSchema = Yup.object().shape({
   value: Yup.number()
     .positive('Number must be positive!')
     .required('Required'),
+  // TODO: use currencies.json to validate currency string
   currency: Yup.string()
     .min(3, 'Too short!')
     .max(3, 'Too long!')
@@ -106,4 +107,4 @@ const CreatePriceForm = ({
   </Wrapper>
 );
 
-export default withTheme(CreatePriceForm);
+export default CreatePriceForm;

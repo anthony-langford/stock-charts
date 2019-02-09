@@ -73,7 +73,6 @@ const CreatePrice = ({
       <FloatingButton onClick={handleClick} />
 
       <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
-      {/* <Modal isOpen={true} handleCloseModal={handleCloseModal}> */}
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>New Price</Title>
@@ -84,7 +83,6 @@ const CreatePrice = ({
           </TitleWrapper>
           
           <CreatePriceForm onSubmit={onSubmit} />
-          {/* <button onClick={handleCloseModal}>Close Modal</button> */}
         </Wrapper>
       </Modal>
     </>

@@ -35,7 +35,6 @@ const StocksList = ({
             id={stock.id}
             name={stock.name}
             code={stock.code}
-            description={stock.description}
             handleClickEdit={handleClickEdit}
             handleClickDelete={handleClickDelete}
           />

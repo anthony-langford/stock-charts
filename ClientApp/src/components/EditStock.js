@@ -46,7 +46,6 @@ const EditStock = ({
   onSubmit,
   stock
 }) => {
-
   return (
     <>
       <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>

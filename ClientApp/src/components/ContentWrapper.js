@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 const ContentWrapper = styled.div`
   box-sizing: border-box;
+  display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
   z-index: 0;
   min-width: calc(100vw - 590px);
   min-height: calc(100vh - 70px);
@@ -19,7 +18,6 @@ const ContentWrapper = styled.div`
   @media (min-width: 738px) {
     padding: 32px 180px 120px 40px; 
   }
-  align-items: center;
   background-color: #F7F8FA;
   color: #53627C;
 `;
