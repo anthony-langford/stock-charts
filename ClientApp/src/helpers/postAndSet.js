@@ -1,4 +1,4 @@
-const postAndSet = async (endpoint = '', data = {}, setter = () => {}) => {
+const postAndSet = async (endpoint = '', data = {}) => {
   const options = {
     method: 'POST',
     headers: {
@@ -9,7 +9,6 @@ const postAndSet = async (endpoint = '', data = {}, setter = () => {}) => {
   try {
     const response = await fetch(`https://localhost:5001/api/${endpoint}/`, options);
     const data = await response.json();
-    await setter(data);
     return data;
   } catch(err) {
     console.error(err); // TypeError: failed to fetch

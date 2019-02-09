@@ -51,7 +51,7 @@ const Chart = ({
   // Map price list 
   const priceList = prices ? (
     prices.map(price => (
-      { x: price.timestamp, y: price.value }
+      { x: price.timestamp, y: Number(price.value.toFixed(2)) }
     ))
   ) : null;
 

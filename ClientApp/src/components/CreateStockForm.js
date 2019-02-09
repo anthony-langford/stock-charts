@@ -34,16 +34,19 @@ const inputFields = [
     id: 'name',
     placeholder: 'Enter Company\'s Name',
     type: 'text',
+    label: 'Name'
   },
   {
     id: 'code',
     placeholder: 'Enter 3-Letter Ticker Code',
     type: 'text',
+    label: 'Code'
   },
   {
     id: 'description',
     placeholder: 'Enter Description',
     type: 'text',
+    label: 'Company Description'
   }
 ];
 

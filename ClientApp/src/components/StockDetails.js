@@ -5,7 +5,7 @@ import { useActions, useStore } from 'easy-peasy';
 import Sidebar from './Sidebar';
 import PageWrapper from './PageWrapper';
 import ContentWrapper from './ContentWrapper';
-import CreateStock from './CreateStock';
+import CreatePrice from './CreatePrice';
 import Chart from './Chart';
 
 // Import helpers
@@ -46,7 +46,7 @@ const StockDetails = ({ stockId }) => {
         <Chart stock={stock} prices={stockPrices} />
       </ContentWrapper>
 
-      <CreateStock />
+      <CreatePrice stockId={stockId} />
     </PageWrapper>
   );
 };

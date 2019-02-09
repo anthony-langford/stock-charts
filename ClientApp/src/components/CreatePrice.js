@@ -5,7 +5,7 @@ import styled, { withTheme } from 'styled-components';
 // Import components
 import Modal from './Modal';
 import FloatingButton from './FloatingButton';
-import CreateStockForm from './CreateStockForm';
+import CreatePriceForm from './CreatePriceForm';
 
 // Import helper functions
 import postAndSet from '../helpers/postAndSet';
@@ -44,9 +44,11 @@ const Spacer = styled.div`
   margin: 0 auto;
 `;
 
-const CreateStock = () => {
+const CreatePrice = ({
+  stockId
+}) => {
   const [modalState, setModalState] = useState(false);
-  const addStock = useActions(actions => actions.stocks.add);
+  const addPrice = useActions(actions => actions.prices.add);
 
   const handleClick = () => {
     setModalState(true);
@@ -57,9 +59,12 @@ const CreateStock = () => {
   }
 
   const onSubmit = (values, { setSubmitting }) => {
-    postAndSet('stocks', values)
+    values['stockId'] = stockId;
+    console.log(values);
+    postAndSet('prices', values)
     .then(result => {
-      addStock(result);
+      console.log(result);
+      addPrice(result);
       setModalState(false);
     });
     setSubmitting(false);
@@ -73,14 +78,14 @@ const CreateStock = () => {
       {/* <Modal isOpen={true} handleCloseModal={handleCloseModal}> */}
         <Wrapper>
           <TitleWrapper>
-            <Title fontSize={18} fontWeight={500}>New Stock</Title>
+            <Title fontSize={18} fontWeight={500}>New Price</Title>
 
             <Spacer />
 
             <CloseButton onClick={handleCloseModal} tabIndex='0'>X</CloseButton>
           </TitleWrapper>
           
-          <CreateStockForm onSubmit={onSubmit} />
+          <CreatePriceForm onSubmit={onSubmit} />
           {/* <button onClick={handleCloseModal}>Close Modal</button> */}
         </Wrapper>
       </Modal>
@@ -88,4 +93,4 @@ const CreateStock = () => {
   );
 };
 
-export default withTheme(CreateStock);
+export default withTheme(CreatePrice);

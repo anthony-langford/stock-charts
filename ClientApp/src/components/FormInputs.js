@@ -61,7 +61,7 @@ const FormInputs = ({
   inputFields.map(inputData => (
     <Row padded key={inputData.id}>
       <Label htmlFor='name'>
-        Company Name
+        {inputData.label}
       </Label>
 
       <InputWrapper>
