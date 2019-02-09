@@ -55,7 +55,7 @@ const CreateStock = () => {
 
   const handleCloseModal = () => {
     setModalState(false);
-  }
+  };
 
   const onSubmit = (values, { setSubmitting }) => {
     fetchAndSet('POST', 'stocks', values)

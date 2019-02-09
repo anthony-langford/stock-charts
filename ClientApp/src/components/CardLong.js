@@ -78,7 +78,7 @@ const CardLong = ({
 
     <Wrapper>
        <EditButton onClick={handleClickEdit} value={id}>Edit</EditButton>
-       <DeleteButton onClick={handleClickDelete}>Delete</DeleteButton>
+       <DeleteButton onClick={handleClickDelete} value={id}>Delete</DeleteButton>
     </Wrapper>
   </CardItem>
 );

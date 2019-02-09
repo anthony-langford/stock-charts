@@ -60,10 +60,8 @@ const CreatePrice = ({
 
   const onSubmit = (values, { setSubmitting }) => {
     values['stockId'] = stockId;
-    console.log(values);
     fetchAndSet('POST', 'prices', values)
     .then(result => {
-      console.log(result);
       addPrice(result);
       setModalState(false);
       setSubmitting(false);

@@ -19,7 +19,6 @@ const StockDetails = ({ stockId }) => {
   const prices = useStore(state => state.prices.items);
   const setStocks = useActions(actions => actions.stocks.set);
   const setPrices = useActions(actions => actions.prices.set);
-  // const [stockPrices, setStockPrices] = useState([]);
   const stock = getStockById(parseInt(stockId), stocks);
   const stockPrices = filterPricesByStockId(parseInt(stockId), prices);
 
@@ -30,12 +29,6 @@ const StockDetails = ({ stockId }) => {
       getAndSet('prices', setPrices)
     ])
   }, []);
-
-  // useEffect(() => {
-  //   const filteredPrices = filterPricesByStockId(stockId, prices);
-  //   console.log('filteredPrices', filteredPrices)
-  //   setStockPrices(filterPricesByStockId(stockId, prices));
-  // }, [prices.length]);
 
   return (
     <PageWrapper>

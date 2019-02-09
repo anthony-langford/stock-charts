@@ -15,6 +15,12 @@ const reducer = {
       const newState = state.items.map(obj => obj.id === payload.id ? payload : obj);
       return { ...state, items: newState };
     },
+    delete: (state, payload) => {
+      const newState = state.items.filter(obj => {
+        return obj.id !== payload.id;
+      });
+      return { ...state, items: newState };
+    },
   },
   prices: {
     items: [],

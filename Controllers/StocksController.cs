@@ -50,10 +50,9 @@ namespace stock_charts.Controllers
         }
 
         // DELETE api/stocks/5
-        [HttpDelete("{id}")]
-        public IActionResult DeleteStock(int id)
+        [HttpDelete]
+        public IActionResult DeleteStock([FromBody]Stock stock)
         {
-            var stock = _context.Stock.Single(x => x.Id == id);
             _context.Remove(stock);
             _context.SaveChanges();
             return StatusCode(202, stock);
