@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useStore, useActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { navigate } from '@reach/router';
