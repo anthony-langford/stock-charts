@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useActions } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
 import ReactModal from 'react-modal';
 
@@ -38,9 +39,6 @@ const StyledModal = styled(ReactModalAdapter)`
     z-index: 1001;
     top: 50%;
     left: 50%;
-    // @media (max-width: 700px) {
-    //   width: 90%;
-    // }
     transform: translate(-50%, -50%);
     border: 1px solid #EAEDF3;
     background-color: #FFFFFF;
@@ -53,31 +51,30 @@ const StyledModal = styled(ReactModalAdapter)`
 
 const Modal = ({
   isOpen,
-  handleCloseModal,
   children
-}) => (
-  <StyledModal
-    isOpen={isOpen}
-    contentLabel='Create Project'
-    onRequestClose={handleCloseModal}
-    shouldCloseOnOverlayClick={true}
-  >
-    {children}
-  </StyledModal>
-);
+}) =>  {
+  const closeModal = useActions(actions => actions.modal.close);
+
+  return (
+    <StyledModal
+      isOpen={isOpen}
+      contentLabel='Create Project'
+      onRequestClose={closeModal}
+      shouldCloseOnOverlayClick={true}
+    >
+      {children}
+    </StyledModal>
+  );
+}
 
 Modal.propTypes = {
   isOpen: PropTypes.bool,
-  handleCloseModal: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ])
 };
 
-Modal.defaultProps = {
-  isOpen: false,
-  handleCloseModal: () => {}
-};
+Modal.defaultProps = {};
 
 export default withTheme(Modal);

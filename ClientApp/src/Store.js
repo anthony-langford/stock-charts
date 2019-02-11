@@ -30,6 +30,15 @@ const reducer = {
       newState.items.push(payload);
       return newState;
     }
+  },
+  activeStock: {
+    item: {},
+    set: ((state, payload) => ({ ...state, item: payload }))
+  },
+  modal: {
+    item: '',
+    set: ((state, payload) => ({ ...state, item: payload })),
+    close: ((state) => ({ ...state, item: '' }))
   }
 };
 

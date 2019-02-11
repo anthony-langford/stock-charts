@@ -1,7 +1,11 @@
 import React from 'react';
+import { useActions, useStore } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
 import Text from './Text';
-import {default as ButtonBase } from './Button';
+import { default as ButtonBase } from './Button';
+
+// Import helpers
+import getStockById from '../helpers/getStockById';
 
 const CardItem = styled.div`
   box-sizing: border-box;
@@ -52,37 +56,56 @@ const CardLong = ({
   id,
   name,
   code,
-  handleClickEdit,
-  handleClickDelete,
   theme
-}) => (
-  <CardItem>
-    <TitleWrapper>
-      {window.innerWidth < 400 ?
-        <Title>{code}</Title> :
-        <Title>{name} ({code})</Title>
-      }
-    </TitleWrapper>
+}) => {
+  const stocks = useStore(state => state.stocks.items);
+  const setActiveStock = useActions(actions => actions.activeStock.set);
+  const setModalState = useActions(actions => actions.modal.set);
 
-    <Wrapper>
-       <Button
-        onClick={handleClickEdit}
-        value={id}
-        backgroundColor={theme.primaryColor}
-        hoverBackgroundColor={theme.button.primaryHover}
-      >
-        Edit
-      </Button>
-      <Button
-        onClick={handleClickDelete}
-        value={id}
-        backgroundColor={theme.tertiaryColor}
-        hoverBackgroundColor={theme.button.tertiaryHover}
-      >
-        Delete
-      </Button>
-    </Wrapper>
-  </CardItem>
-);
+  const handleClickEdit = e => {
+    e.preventDefault();
+    const stockToEdit = getStockById(parseInt(e.target.value), stocks);
+    setActiveStock(stockToEdit);
+    setModalState('editStock');
+  };
+
+  const handleClickDelete = e => {
+    e.preventDefault();
+    const stockToDelete = getStockById(parseInt(e.target.value), stocks);
+    setActiveStock(stockToDelete);
+    setModalState('deleteStock');
+  };
+    
+  return (
+    <CardItem>
+      <TitleWrapper>
+        {window.innerWidth < 400 ?
+          <Title>{code}</Title> :
+          <Title>{name} ({code})</Title>
+        }
+      </TitleWrapper>
+
+      <Wrapper>
+        <Button
+          onClick={handleClickEdit}
+          value={id}
+          backgroundColor={theme.primaryColor}
+          hoverBackgroundColor={theme.button.primaryHover}
+        >
+          Edit
+        </Button>
+
+        <Button
+          onClick={handleClickDelete}
+          value={id}
+          backgroundColor={theme.tertiaryColor}
+          hoverBackgroundColor={theme.button.tertiaryHover}
+        >
+          Delete
+        </Button>
+      </Wrapper>
+    </CardItem>
+  );
+}
 
 export default withTheme(CardLong);

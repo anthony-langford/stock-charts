@@ -1,9 +1,13 @@
 import React from 'react';
+import { useStore, useActions } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
 
 // Import components
 import Modal from './Modal';
 import { default as ButtonBase } from './Button';
+
+// Import helpers
+import fetchAndSet from '../helpers/fetchAndSet';
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -61,26 +65,34 @@ const Button = styled(ButtonBase)`
 `;
 
 const DeleteStock = ({
-  modalState,
-  handleCloseModal,
-  onClick,
-  stock,
   theme
 }) => {
+  const modalState = useStore(state => state.modal.item);
+  const closeModal = useActions(actions => actions.modal.close);
+  const activeStock = useStore(state => state.activeStock.item);
+  const deleteStock = useActions(actions => actions.stocks.delete);
+
+  const onClick = () => {
+    fetchAndSet('DELETE', 'stocks', activeStock)
+      .then(result => {
+        deleteStock(result);
+        closeModal();
+      });
+  };
 
   return (
     <>
-      <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
+      <Modal isOpen={modalState === 'deleteStock'}>
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>Delete Stock</Title>
 
             <Spacer />
 
-            <CloseButton onClick={handleCloseModal} tabIndex='0'>X</CloseButton>
+            <CloseButton onClick={() => closeModal()} tabIndex='0'>X</CloseButton>
           </TitleWrapper>
           
-          <Content>Are you sure you want to delete {stock ? stock.name : null}?</Content>
+          <Content>Are you sure you want to delete {activeStock ? activeStock.name : null}?</Content>
           <ButtonsWrapper>
             <Button
               onClick={onClick}
@@ -90,7 +102,7 @@ const DeleteStock = ({
               Yes
             </Button>
             <Button
-              onClick={handleCloseModal}
+              onClick={closeModal}
               backgroundColor={theme.primaryColor}
               hoverBackgroundColor={theme.button.primaryHover}
             >
@@ -101,6 +113,6 @@ const DeleteStock = ({
       </Modal>
     </>
   );
-};
+}
 
 export default withTheme(DeleteStock);

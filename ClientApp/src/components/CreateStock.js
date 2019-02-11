@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useActions } from 'easy-peasy';
+import { useStore, useActions } from 'easy-peasy';
 import styled from 'styled-components';
 import { navigate } from '@reach/router';
 
@@ -46,22 +46,16 @@ const Spacer = styled.div`
 `;
 
 const CreateStock = () => {
-  const [modalState, setModalState] = useState(false);
+  const modalState = useStore(state => state.modal.item);
+  const setModalState = useActions(actions => actions.modal.set);
+  const closeModal = useActions(actions => actions.modal.close);
   const addStock = useActions(actions => actions.stocks.add);
-
-  const handleClick = () => {
-    setModalState(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalState(false);
-  };
 
   const onSubmit = (values, { setSubmitting }) => {
     fetchAndSet('POST', 'stocks', values)
     .then(result => {
       addStock(result);
-      setModalState(false);
+      closeModal();
       navigate('/stocks');
       setSubmitting(false);
     });
@@ -69,16 +63,16 @@ const CreateStock = () => {
 
   return (
     <>
-      <FloatingButton onClick={handleClick} />
+      <FloatingButton onClick={() => setModalState('createStock')} />
 
-      <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
+      <Modal isOpen={modalState === 'createStock'}>
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>New Stock</Title>
 
             <Spacer />
 
-            <CloseButton onClick={handleCloseModal} tabIndex='0'>X</CloseButton>
+            <CloseButton onClick={() => closeModal()} tabIndex='0'>X</CloseButton>
           </TitleWrapper>
           
           <CreateStockForm onSubmit={onSubmit} />

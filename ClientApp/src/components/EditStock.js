@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStore, useActions } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
 
 // Import components
@@ -40,29 +41,28 @@ const Spacer = styled.div`
 `;
 
 const EditStock = ({
-  title,
-  modalState,
-  handleCloseModal,
-  onSubmit,
-  stock
+  title
 }) => {
+  const modalState = useStore(state => state.modal.item);
+  const closeModal = useActions(actions => actions.modal.close);
+
   return (
     <>
-      <Modal isOpen={modalState} handleCloseModal={handleCloseModal}>
+      <Modal isOpen={modalState === 'editStock'}>
         <Wrapper>
           <TitleWrapper>
             <Title fontSize={18} fontWeight={500}>{title}</Title>
 
             <Spacer />
 
-            <CloseButton onClick={handleCloseModal} tabIndex='0'>X</CloseButton>
+            <CloseButton onClick={() => closeModal()} tabIndex='0'>X</CloseButton>
           </TitleWrapper>
           
-          <EditStockForm onSubmit={onSubmit} stock={stock} />
+          <EditStockForm />
         </Wrapper>
       </Modal>
     </>
   );
-};
+}
 
 export default withTheme(EditStock);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStore, useActions } from 'easy-peasy';
 import styled, { withTheme } from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -6,6 +7,9 @@ import * as Yup from 'yup';
 // Import components
 import Button from './Button';
 import FormInputs from './FormInputs';
+
+// Import helpers
+import fetchAndSet from '../helpers/fetchAndSet';
 
 const Wrapper = styled.div`
   display: flex;
@@ -73,52 +77,68 @@ const validationSchema = Yup.object().shape({
     .required('Required')
 });
 
-const EditStockForm = ({
-  onSubmit,
-  stock
-}) => (
-  <Wrapper>
-    <Formik
-      initialValues={initialValues(stock)}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {props => {
-        const {
-          values,
-          touched,
-          errors,
-          // dirty,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          // handleReset,
-        } = props;
-        return (
-          <Form onSubmit={handleSubmit}>
-            <FormInputs
-              inputFields={inputFields}
-              values={values}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              errors={errors}
-              touched={touched}
-            />
+const EditStockForm = () => {
+  const activeStock = useStore(state => state.activeStock.item);
+  const editStock = useActions(actions => actions.stocks.edit);
+  const setModalState = useActions(actions => actions.modal.set);
 
-            <ButtonWrapper>
-              <SubmitButton
-                type='submit'
-                disabled={isSubmitting}
-              >
-                Save and Continue
-              </SubmitButton>
-            </ButtonWrapper>
-          </Form>
-        );
-      }}
-    </Formik>
-  </Wrapper>
-);
+  // TODO: skip request if nothing changed
+  const onSubmit = (values, { setSubmitting }) => {
+    values.id = activeStock.id;
+    values.createdOn = activeStock.createdOn;
+    fetchAndSet('PUT', 'stocks', values)
+      .then(result => {
+        editStock(result);
+        setModalState('');
+        setSubmitting(false);
+      });
+  };
+    
+  return (
+    <Wrapper>
+      <Formik
+        initialValues={initialValues(activeStock)}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {props => {
+          const {
+            values,
+            touched,
+            errors,
+            // dirty,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            // handleReset,
+          } = props;
+
+          return (
+            <Form onSubmit={handleSubmit}>
+              <FormInputs
+                inputFields={inputFields}
+                values={values}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                errors={errors}
+                touched={touched}
+              />
+
+              <ButtonWrapper>
+                <SubmitButton
+                  type='submit'
+                  disabled={isSubmitting}
+                >
+                  Save and Continue
+                </SubmitButton>
+              </ButtonWrapper>
+            </Form>
+          );
+        }}
+      </Formik>
+    </Wrapper>
+  );
+}
 
 export default withTheme(EditStockForm);
